@@ -22,9 +22,12 @@ namespace Taller_PI_1
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
+            
             InitializeComponent();
+           
         }
 
         private void ButtonGenerateReportCLick(object sender, RoutedEventArgs e)
@@ -34,10 +37,20 @@ namespace Taller_PI_1
 
         private void ButtonImportFile(object sender, RoutedEventArgs e)
         {
+            String filePath = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            if (openFileDialog.ShowDialog() == true) { }
-               
+            if (openFileDialog.ShowDialog() == true) { 
+                filePath= openFileDialog.FileName;
+            }
+
+            using (var reader = new StreamReader(filePath))
+            {
+                while (!reader.EndOfStream)
+                {
+
+                }
+            }
         }
     }
 }
