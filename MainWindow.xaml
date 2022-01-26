@@ -7,6 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="10">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label>tabla de municipios</Label>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
+            <Button x:Name="btnReport" Margin="0,10,0,0" Click="ButtonGenerateReportCLick">reporte</Button>
+            <ComboBox x:Name="combobox">wp,a</ComboBox>
+        </StackPanel>
+        <Button x:Name="btnImport" Grid.Row="0" Grid.Column="1" Margin="0,10,0,0" Click="ButtonImportFile">Import</Button>
+        <DataGrid Name="tabla" Grid.Column="0" Grid.Row="1" Margin="10,0,0,0">
+
+
+
+        </DataGrid>
     </Grid>
 </Window>
