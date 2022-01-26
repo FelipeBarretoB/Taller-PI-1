@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using Microsoft.Win32;
 
 namespace Taller_PI_1
 {
@@ -32,7 +34,10 @@ namespace Taller_PI_1
 
         private void ButtonImportFile(object sender, RoutedEventArgs e)
         {
-            combobox.Items.Add("b");
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == true) { }
+               
         }
     }
 }

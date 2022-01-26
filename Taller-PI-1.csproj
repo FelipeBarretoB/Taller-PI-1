@@ -6,6 +6,7 @@
     <RootNamespace>Taller_PI_1</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+	<UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
 </Project>
