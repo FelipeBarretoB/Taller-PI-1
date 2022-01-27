@@ -42,15 +42,27 @@ namespace Taller_PI_1
 
             if (openFileDialog.ShowDialog() == true) { 
                 filePath= openFileDialog.FileName;
+                test.Content = openFileDialog.FileName;
             }
 
-            using (var reader = new StreamReader(filePath))
+            using (var reader = new StreamReader("D:\\Perfil\\DescargasDIVIPOLA-_C_digos_municipios.csv"))
             {
-                while (!reader.EndOfStream)
-                {
-
-                }
+                test.Content = reader.ReadLine();
             }
         }
     }
+    /*
+    public class Municipios
+    {
+        public String Code { get; set; }
+
+        public String CodeMuni { get; set; }
+
+        public string NameDep { get; set; }
+
+        public string NameMuni { get; set; }
+
+        public string Type { get; set; }
+    }
+    */
 }
