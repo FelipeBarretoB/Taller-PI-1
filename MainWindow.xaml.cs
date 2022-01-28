@@ -37,25 +37,34 @@ namespace Taller_PI_1
 
         private void ButtonImportFile(object sender, RoutedEventArgs e)
         {
-            String filePath = "";
+            
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             if (openFileDialog.ShowDialog() == true) { 
-                filePath= openFileDialog.FileName;
-                test.Content = openFileDialog.FileName;
+               
+               
             }
-
-            using (var reader = new StreamReader("D:\\Perfil\\DescargasDIVIPOLA-_C_digos_municipios.csv"))
+            List<Municipios> muni = new List<Municipios>();
+            using (var reader = new StreamReader(openFileDialog.FileName))
             {
-                test.Content = reader.ReadLine();
+                while (!reader.EndOfStream)
+                {
+                    String line = reader.ReadLine();
+                    String[] lines = line.Split(',');
+                    test.Content = line;
+                    muni.Add(new Municipios() { Code = lines[0], CodeMuni=lines[1], NameDep=lines[2], NameMuni=lines[3], Type=lines[4]});
+                }
+            
+
             }
+            tabla.ItemsSource = muni;
         }
     }
-    /*
+    
     public class Municipios
     {
         public String Code { get; set; }
-
+        
         public String CodeMuni { get; set; }
 
         public string NameDep { get; set; }
@@ -63,6 +72,7 @@ namespace Taller_PI_1
         public string NameMuni { get; set; }
 
         public string Type { get; set; }
+        
     }
-    */
+    
 }
