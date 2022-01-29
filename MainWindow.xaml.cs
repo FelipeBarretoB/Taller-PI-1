@@ -25,14 +25,21 @@ namespace Taller_PI_1
         
         public MainWindow()
         {
-            
             InitializeComponent();
+            
            
         }
 
         private void ButtonGenerateReportCLick(object sender, RoutedEventArgs e)
         {
-            combobox.Items.Add("A");
+            char x;
+            for(int i = 65; i <= 90; i++)
+            {
+                x = Convert.ToChar(i);
+                combobox.Items.Add(x.ToString());
+            }
+
+            //combobox.Items.Add("A");
         }
 
         private void ButtonImportFile(object sender, RoutedEventArgs e)
