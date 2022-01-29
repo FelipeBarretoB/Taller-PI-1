@@ -22,9 +22,10 @@ namespace Taller_PI_1
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        List<Municipios> muni;
         public MainWindow()
         {
+            muni = new List<Municipios>();
             InitializeComponent();
             
            
@@ -39,7 +40,44 @@ namespace Taller_PI_1
                 combobox.Items.Add(x.ToString());
             }
 
-            //combobox.Items.Add("A");
+        }
+
+        private void ButtonSearchCLick(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("cualquier mensaje");
+            List<Municipios> tem = new List<Municipios>();
+            string name;
+            string cb;
+            string str;
+            string x;
+            
+
+            for (int i = 0; i < 1/*muni.Count*/; i++)
+            {
+                
+                str = muni[i].NameMuni;
+                name = str[0].ToString();
+                cb = combobox.SelectionBoxItemStringFormat;
+                test.Content = cb;
+
+                if (string.Equals(name, cb, StringComparison.OrdinalIgnoreCase))
+                {
+                    /*if(muni[i] == null)
+                    {
+                        i = 99999;
+                        test.Content = "null";
+                    }*/
+                    tem.Add(muni[i]);
+                    x = Convert.ToString(tem.Count);
+                    //test.Content = x;
+                }
+                else
+                {
+                    
+                    //test.Content = "not equals";
+                }
+            }
+            tabla.ItemsSource = tem;
         }
 
         private void ButtonImportFile(object sender, RoutedEventArgs e)
@@ -51,14 +89,14 @@ namespace Taller_PI_1
                
                
             }
-            List<Municipios> muni = new List<Municipios>();
+            //List<Municipios> muni = new List<Municipios>();
             using (var reader = new StreamReader(openFileDialog.FileName))
             {
                 while (!reader.EndOfStream)
                 {
                     String line = reader.ReadLine();
                     String[] lines = line.Split(',');
-                    test.Content = line;
+                    //test.Content = line;
                     muni.Add(new Municipios() { Code = lines[0], CodeMuni=lines[1], NameDep=lines[2], NameMuni=lines[3], Type=lines[4]});
                 }
             
@@ -67,7 +105,8 @@ namespace Taller_PI_1
             tabla.ItemsSource = muni;
         }
     }
-    
+
+
     public class Municipios
     {
         public String Code { get; set; }
