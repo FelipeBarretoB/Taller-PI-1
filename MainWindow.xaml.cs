@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Wpf;
 using System.IO;
 using Microsoft.Win32;
 
@@ -25,6 +27,11 @@ namespace Taller_PI_1
         List<Municipios> muni;
 
         String fileName;
+
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; }
+        public Func<double, string> Formatter { get; set; }
+
         public MainWindow()
         {
             muni = new List<Municipios>();
@@ -36,10 +43,31 @@ namespace Taller_PI_1
                 x = Convert.ToChar(i);
                 combobox.Items.Add(x.ToString());
             }
-        }
+            
+            SeriesCollection = new SeriesCollection
+            {
+                new RowSeries
+                {
+                    Title = "Tipos",
+                    Values = new ChartValues<double> { 0, 0, 0}
+                }
+            };
 
+
+            Labels = new[] { "Municipio", "Isla", "Area no municipal" };
+            Formatter = value => value.ToString("N");
+
+            DataContext = this;
+
+            
+
+
+
+        }
+        int c = 10;
         private void ButtonGenerateReportCLick(object sender, RoutedEventArgs e)
         {
+           
             if(!combobox.Text.Equals("")) { 
                 char[] comboText= combobox.Text.ToUpper().ToCharArray();
                 List<Municipios> temp = new List<Municipios>();
@@ -58,9 +86,41 @@ namespace Taller_PI_1
                 tabla.ItemsSource = null;
                 tabla.ItemsSource = temp;
                 test.Content = "Datos filtrados";
+
+                int numMuni = 0;
+                int numIsla = 0;
+                int numAr = 0;
+               
+                foreach(Municipios type in temp)
+                {
+                    if (type.Type.Equals("Municipio"))
+                    {
+                        numMuni++;
+                    }else if (type.Type.Equals("Isla"))
+                    {
+                        numIsla++;
+                    }
+                    else
+                    {
+                        numAr++;
+                    }
+                }
+                SeriesCollection[0] = new RowSeries
+                {
+                    Title = "Tipos",
+                    Values = new ChartValues<double> { numMuni, numIsla, numAr }
+                };
+
+                Labels = new[] { "Maria", "Susan", "Charles" };
+                Formatter = value => value.ToString("N");
+
+                DataContext = this;
             }
             else
             {
+         
+                
+             
                 tabla.ItemsSource = null;
                 tabla.ItemsSource = muni;
                 test.Content = "Selecione una letra";
@@ -106,11 +166,11 @@ namespace Taller_PI_1
         
         public String CodeMuni { get; set; }
 
-        public string NameDep { get; set; }
+        public String NameDep { get; set; }
 
-        public string NameMuni { get; set; }
+        public String NameMuni { get; set; }
 
-        public string Type { get; set; }
+        public String Type { get; set; }
         
     }
     
