@@ -22,9 +22,10 @@ namespace Taller_PI_1
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        List<Municipios> muni;
         public MainWindow()
         {
+            muni = new List<Municipios>();
             InitializeComponent();
 
             char x;
@@ -41,8 +42,8 @@ namespace Taller_PI_1
                 test.Content = combobox.Text;
 
             }
-            
-            
+
+            //combobox.Items.Add("A");
         }
 
 
@@ -57,14 +58,14 @@ namespace Taller_PI_1
                
                
             }
-            List<Municipios> muni = new List<Municipios>();
+            //List<Municipios> muni = new List<Municipios>();
             using (var reader = new StreamReader(openFileDialog.FileName))
             {
                 while (!reader.EndOfStream)
                 {
                     String line = reader.ReadLine();
                     String[] lines = line.Split(',');
-                    test.Content = line;
+                    //test.Content = line;
                     muni.Add(new Municipios() { Code = lines[0], CodeMuni=lines[1], NameDep=lines[2], NameMuni=lines[3], Type=lines[4]});
                 }
             
@@ -73,7 +74,8 @@ namespace Taller_PI_1
             tabla.ItemsSource = muni;
         }
     }
-    
+
+
     public class Municipios
     {
         public String Code { get; set; }
