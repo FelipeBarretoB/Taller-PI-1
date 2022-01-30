@@ -23,6 +23,8 @@ namespace Taller_PI_1
     public partial class MainWindow : Window
     {
         List<Municipios> muni;
+
+        String fileName;
         public MainWindow()
         {
             muni = new List<Municipios>();
@@ -39,8 +41,29 @@ namespace Taller_PI_1
         private void ButtonGenerateReportCLick(object sender, RoutedEventArgs e)
         {
             if(!combobox.Text.Equals("")) { 
-                test.Content = combobox.Text;
-
+                char[] comboText= combobox.Text.ToUpper().ToCharArray();
+                List<Municipios> temp = new List<Municipios>();
+                foreach(Municipios name in muni)
+                {
+                    
+                    char[] compare = name.NameMuni.ToCharArray();
+                    
+                    if (comboText[0].CompareTo(compare[0])==0)
+                    {
+                        temp.Add(name);
+                    }
+                    
+                    
+                }
+                tabla.ItemsSource = null;
+                tabla.ItemsSource = temp;
+                test.Content = "Datos filtrados";
+            }
+            else
+            {
+                tabla.ItemsSource = null;
+                tabla.ItemsSource = muni;
+                test.Content = "Selecione una letra";
             }
 
             //combobox.Items.Add("A");
@@ -58,8 +81,9 @@ namespace Taller_PI_1
                
                
             }
+            fileName = openFileDialog.FileName;
             //List<Municipios> muni = new List<Municipios>();
-            using (var reader = new StreamReader(openFileDialog.FileName))
+            using (var reader = new StreamReader(fileName))
             {
                 while (!reader.EndOfStream)
                 {
